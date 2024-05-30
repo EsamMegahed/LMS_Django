@@ -1,0 +1,12 @@
+{% extends 'dashboard_base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<form method="Post">
+    {% csrf_token %}
+    {{form}}
+    <button type="submit">Update Changes</button>
+</form>
+{% endblock %}

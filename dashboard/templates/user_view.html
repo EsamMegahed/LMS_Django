@@ -1,0 +1,29 @@
+{% extends 'dashboard_base.html' %}
+{% load static %}
+
+{% block content %}
+<h2>Users</h2>
+<span class="orders-btn" style="padding-left: 85%;display:inline;padding-bottom: 20%;"><button hight='30px'
+        type="button" class="btn button-sm sky"><a href="#">Add User</a></button></span>
+{% for user in users %}
+
+<div class="row">
+    <div class="col-md-4 col-lg-2 col-xl-2 col-sm-4 col-8">
+        <div class="widget-card widget-bg4">
+            <div class="wc-item">
+
+                <div style="display:inline;width: 30%;">
+                    <h3 style="color: aliceblue;font-size: 30px;">{{user.username}}</h3>
+
+                </div>
+                <span class="orders-btn" style="padding-left: 85%;display:inline;padding-bottom: 20%;"><button
+                        hight='30px' type="button" class="btn button-sm grean"><a
+                            href="{% url 'details' id=user.id %}">View User</a></button></span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+
+{% endblock %}
