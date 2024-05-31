@@ -54,6 +54,7 @@
 	<link class="skin" rel="stylesheet" type="text/css" href="{% static 'admin-assets/css/color/color-1.css' %}">
 	<!-- Font Awesome CSS ============================================= -->
 	<link rel="stylesheet" href="{% static 'admin-assets/vendors/fontawesome/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'admin-assets/vendors/bootstrap/css/bootstrap.min.css' %}">
 
 </head>
 
@@ -274,20 +275,12 @@
 						</a>
 						<ul>
 							<li>
-								<a href="mailbox.html" class="ttr-material-button"><span class="ttr-label">User
+								<a href="{% url 'create_user' %}" class="ttr-material-button"><span class="ttr-label">User
 										Creation</span></a>
 							</li>
 							<li>
-								<a href="mailbox-compose.html" class="ttr-material-button"><span class="ttr-label">User
+								<a href="{% url 'users_view' %}" class="ttr-material-button"><span class="ttr-label">User
 										View</span></a>
-							</li>
-							<li>
-								<a href="mailbox-read.html" class="ttr-material-button"><span class="ttr-label">User
-										Update</span></a>
-							</li>
-							<li>
-								<a href="mailbox-read.html" class="ttr-material-button"><span class="ttr-label">User
-										Delete</span></a>
 							</li>
 						</ul>
 					</li>

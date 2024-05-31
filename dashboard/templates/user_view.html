@@ -1,27 +1,38 @@
 {% extends 'dashboard_base.html' %}
 {% load static %}
-
+{% load bootstrap4 %}
 {% block content %}
-<h2>Users</h2>
-<span class="orders-btn" style="padding-left: 85%;display:inline;padding-bottom: 20%;"><button hight='30px'
-        type="button" class="btn button-sm sky"><a href="#">Add User</a></button></span>
+<div class="container" style="padding-bottom: 10px;">
+    <div class="row">
+        <div class="col">
+            <h1 class="breadcrumb-title" style="padding-left: 20px;">Users</h1>
+        </div>
+        <div class="col" style="text-align: right;">
+            <span class="orders-btn" style="padding-right: 20px;"><a href="{% url 'create_user' %}"><button
+                        type="button" class="btn btn-primary btn-lg sky">Add
+                        User</button></a></span>
+        </div>
+    </div>
+</div>
 {% for user in users %}
+{% if user.is_superuser %}
+{% else %}
+<div class="container">
 
-<div class="row">
-    <div class="col-md-4 col-lg-2 col-xl-2 col-sm-4 col-8">
-        <div class="widget-card widget-bg4">
-            <div class="wc-item">
+    <div class="w-auto p-3 border rounded p-3 mb-2  text-white " style="background-color:#0007df;opacity: 70%;">
+        <div class='w-auto p-3 row '>
+            <div class="col" style="text-align: left;">
 
-                <div style="display:inline;width: 30%;">
-                    <h3 style="color: aliceblue;font-size: 30px;">{{user.username}}</h3>
-
-                </div>
-                <span class="orders-btn" style="padding-left: 85%;display:inline;padding-bottom: 20%;"><button
-                        hight='30px' type="button" class="btn button-sm grean"><a
-                            href="{% url 'details' id=user.id %}">View User</a></button></span>
+                <h3 style="color: #ffffff;font-size: 30px;">{{user.username}}</h3>
+            </div>
+            <div class="col" style="text-align: right;">
+                <span class="orders-btn btn-lg w-auto"><a href="{% url 'details' id=user.id %}"><button type="button"
+                            class="btn btn-secondary">View
+                            User</button></a></span>
             </div>
         </div>
     </div>
+    {% endif %}
 </div>
 {% endfor %}
 
