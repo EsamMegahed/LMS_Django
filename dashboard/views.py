@@ -3,14 +3,22 @@ from django.urls import reverse
 from .models import UserView
 from django.contrib.auth.models import User
 from .forms import UserForms,UserCreate
-
+from django.core.paginator import Paginator
 from django.contrib import messages
+from .filters import UsersFilter
 # Create your views here.
 
 def dash(request):
     users = User.objects.all()
-    form = UserForms()
-    context = {'users':users}
+    user_filter = UsersFilter(request.GET,queryset=users)
+    users = user_filter.qs
+    paginator = Paginator(users,3)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+
+    context = {'users':page_obj,
+               'user_filter':user_filter}
     return render(request, "user_view.html", context)
 
 def user_detail(request,id):
