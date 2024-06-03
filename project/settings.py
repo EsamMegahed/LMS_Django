@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     # My Apps 
     'authentication',
     'dashboard',
-
+    'courses',
     # packages 
     
     "bootstrap4",
