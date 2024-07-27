@@ -1,0 +1,25 @@
+{% extends 'site_base.html' %}
+
+{% load static %}
+
+
+{% block site_content %}
+<div class="container">
+    <h2>{{course.course_name}}</h2>
+    {% for chap in chapter %}
+
+
+    <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action active">
+            {{chap.name}}
+        </a>
+        {% for lesson in chap.chapter_lesson.all %}
+
+        <a href="{% url 'site_course_lesson' id=lesson.id %}" class="list-group-item list-group-item-action">{{lesson.lesson_name}}</a>
+        {% endfor %}
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock site_content %}

@@ -1,0 +1,16 @@
+{% extends 'dashboard_base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="container">
+    <h1 class="breadcrumb-title" style="padding-left: 20px;border:none;">Course Creation</h1>
+    <form method="POST" enctype='multipart/form-data' class='edit-profile m-b30' >
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button class="btn btn-lg text-white " style="width: 100%;" type="submit">Create Course</button>
+    </form>
+</div>
+{% endblock content %}

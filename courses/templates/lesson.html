@@ -1,0 +1,50 @@
+{% extends 'site_base.html' %}
+
+{% load static %}
+
+
+{% block site_content %}
+
+
+
+<div class="container">
+  <h2>
+    Name : {{lesson.lesson_name}}
+  </h2>
+  <h3>
+    Description : {{lesson.lesson_description}}
+  </h3>
+  {% if lesson.lesson_video_file.url != Null %}
+
+
+
+
+  <div class="embed-responsive embed-responsive-16by9">
+    <iframe class="embed-responsive-item" src="{{lesson.lesson_video_file.url}}"></iframe>
+  </div>
+  
+
+  {% endif %}
+
+  {% if lesson.lesson_text_file != Null %}
+  <h2>
+    Lesson In Text
+  </h2>
+
+  {{lesson.lesson_text_file|linebreaks}}
+  {% else %}
+  <h2>
+    1
+  </h2>
+  {% endif %}
+
+  {% if lesson.quiz != Null %}
+  <h2>
+    Quiz
+  </h2>
+  {{lesson.quiz|linebreaks}}
+  {% endif %}
+
+
+</div>
+{% endblock site_content %}

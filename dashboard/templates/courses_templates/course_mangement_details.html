@@ -1,0 +1,89 @@
+{% extends 'dashboard_base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12 m-b30">
+            <div class="widget-box">
+                <div class="wc-title">
+                    <h2 style="padding-bottom: 10px;">Course Name : <span
+                            style="color: rgb(18, 136, 221);">{{course.course_name}}</span></h2>
+
+                    <h2>Teacher : <span style="color: rgb(18, 136, 221);">{{course.teacher}}</span></h2>
+                    <h4> Total Chapter : <span style="color: rgb(18, 136, 221);">{{total_chapters}}</span></h4>
+                    <h4> Total Lessons : <span style="color: rgb(18, 136, 221);">{{total_lessons}}</span></h4>
+
+
+
+                    <div class="col" style="text-align: right;">
+                        <a href="{% url 'chapter_create' id=course.id %}">
+                            <button class="btn btn-lg bg-secondary text-white " type="submit">
+                                <span class="ttr-icon"><i class="ti-plus"></i></span> Add
+                                Chapter</button>
+                        </a>
+                        <a href="{% url 'course_managment_edit' id=course.id %}">
+                            <button class="btn btn-lg bg-secondary text-white " type="submit"><span class="ttr-icon"><i class="ti-pencil-alt2"></i></span> Course Edit</button>
+                        </a>
+                        <a href="{% url 'course_managment_delete' id=course.id %}">
+                            <button class="btn btn-lg bg-danger text-white " type="submit"> <span class="ttr-icon"><i class="ti-close"></i></span> Delete Course</button>
+                        </a>
+
+                    </div>
+                </div>
+                {% for chap in chapter %}
+                <div class="widget-inner">
+                    <div class="list-group">
+                        <div class="list-group-item list-group-item-action active">
+
+
+                            <h2>{{forloop.counter}} : {{chap.name}}</h2>
+                            <h4>Lessons In This Chapter : {{chap.chapter_lesson.all | length}}</h4>
+
+
+                            <div style="text-align: right;">
+                                <a href="{% url 'chapter_update' id=chap.id %}">
+                                    <button class="btn btn-lg bg-secondary text-white " type="submit"><span class="ttr-icon"><i class="ti-pencil-alt2"></i></span> Change Chapter
+                                        Name</button>
+                                </a>
+                                <a href="{% url 'lesson_create' id=chap.id %}">
+                                    <button class="btn btn-lg bg-secondary text-white " type="submit"><span class="ttr-icon"><i class="ti-plus"></i></span> Add
+                                        Lesson</button>
+                                </a>
+                                <a href="{% url 'chapter_delete' id=chap.id %}">
+                                    <button class="btn btn-lg bg-danger text-white " type="submit"><span class="ttr-icon"><i class="ti-close"></i></span> Delete
+                                        Chapter</button>
+                                </a>
+                            </div>
+
+                        </div>
+
+                        {% for lesson in chap.chapter_lesson.all %}
+                        <div class="list-group-item list-group-item-action disabled">
+                            <div style="text-align: left;">
+                                <h3>
+                                    <a href="{% url 'lesson_view' id=lesson.id  %}"><span class="ttr-icon"><i class="ti-link"></i></span> {{forloop.counter}}
+                                        : {{lesson.lesson_name}}</a>
+
+                                    </a>
+                                </h3>
+                            </div>
+                            <div style="text-align: right;">
+
+
+
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

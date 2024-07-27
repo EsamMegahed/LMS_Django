@@ -1,0 +1,108 @@
+{% extends 'dashboard_base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+<div class="container" style="padding-bottom: 10px;">
+    <div class="row">
+        <div class="col">
+            <h1 class="breadcrumb-title" style="padding-left: 20px;">Users</h1>
+        </div>
+        <div class="col" style="text-align: right;">
+            <span class="orders-btn" style="padding-right: 20px;"><a href="{% url 'create_user' %}"><button
+                        type="button" class="btn btn-success btn-lg sky">Add
+                        User</button></a></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <nav class="navbar navbar-light bg-light">
+                <form class="form-inline" method="GET">
+                    <span>
+                        {% bootstrap_form user_filter.form %}
+                    </span>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </nav>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="container">
+
+    {% if users.has_other_pages %}
+
+
+        {% for user in users %}
+            {% if user.is_superuser %}
+            <div class="w-auto p-3 border rounded p-3 mb-2  text-white " style="background-color:#df0013;opacity: 70%;">
+                <div class='w-auto p-3 row '>
+                    <div class="col" style="text-align: left;">
+
+                        <h3 style="color: #ffffff;font-size: 30px;">{{user.username}}</h3>
+                    </div>
+                    <div class="col" style="text-align: right;">
+                        <span class="orders-btn btn-lg w-auto"><a href="#"><button type="button" class="btn btn-secondary">Can
+                                    Not View
+                                    Super User</button></a></span>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+
+            <div class="w-auto p-3 border rounded p-3 mb-2  text-white " style="background-color:#0007df;opacity: 70%;">
+                <div class='w-auto p-3 row '>
+                    <div class="col" style="text-align: left;">
+
+                        <h3 style="color: #ffffff;font-size: 30px;">{{user.username}}</h3>
+                    </div>
+                    <div class="col" style="text-align: right;">
+                        <span class="orders-btn btn-lg w-auto"><a href="{% url 'details' id=user.id %}"><button type="button"
+                                    class="btn btn-secondary">View
+                                    User</button></a></span>
+                    </div>
+                </div>
+            </div>
+            {% endif%}
+        {% endfor %}
+
+
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                {% if users.has_previous %}
+                <li class="page-item"><a href="?page=1">&laquo; first</a></li>
+                <li class="page-item"><a href="?page={{ users.previous_page_number }}">previous</a></li>
+                {% endif %}
+                {% for i in users.paginator.page_range %}
+
+                <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+                {% endfor %}
+
+                {% if users.has_next %}
+                <li class="page-item"><a href="?page={{ users.next_page_number }}">next</a></li>
+                <li class="page-item"><a href="?page={{ users.paginator.num_pages }}">last &raquo;</a></li>
+                {% endif %}
+                
+            </ul>
+        </nav>
+    {% endif %}
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

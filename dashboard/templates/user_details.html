@@ -1,0 +1,42 @@
+{% extends 'dashboard_base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <h1 class="breadcrumb-title" style="padding-left: 20px;border:none;padding-bottom:20px">User Details</h1>
+    <div class="w-auto p-3 border rounded p-3 mb-2 ">
+        <form>
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="exampleInputEmail1">User Name</label>
+                <input class="form-control" placeholder="{{user.username}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email</label>
+                <input class="form-control" placeholder="{{user.email}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">First Name</label>
+                <input class="form-control" placeholder="{{user.first_name}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Last Name</label>
+                <input class="form-control" placeholder="{{user.last_name}}" readonly>
+            </div>
+        </form>
+        <div class="row">
+            <div class="col" style="text-align: center;">
+                <a class="wa-100" href="{% url 'update' id=user.id %}"><button class="btn btn-lg bg-primary text-white "
+                        type="submit">Update</button></a>
+            </div>
+            <div class="col" style="text-align: center;">
+                <form method="Post" class="" style="width: 100%;">
+                    {% csrf_token %}
+                    <button class="btn btn-lg bg-danger text-white " type="submit">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'dashboard_base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <h1 class="breadcrumb-title" style="padding-left: 20px;padding-bottom: 20px;border:none;">Create User</h1>
+
+    <div class="w-auto p-3 border rounded p-3 mb-2  text-white">
+        <form method="POST">
+
+            {% csrf_token %}
+            <div class="form-group col-12">
+                {% bootstrap_form form %}
+
+            </div>
+            <button class="btn btn-lg text-white" style="width: 100%;" type="submit">Create</button>
+
+        </form>
+    </div>
+</div>
+{% endblock %}
